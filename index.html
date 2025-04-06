@@ -25,11 +25,26 @@
         box-shadow: 2px 5px 10px #0a141d;
     }
     .tagdiv{
-        font-family: Helvetica;
-        font-weight: bold;
-        padding: 5px 10px;
-        font-size: 30px;
-        margin-bottom: -1px;
+        /* Existing styles */
+font-family: Helvetica;
+font-weight: bold;
+padding: 5px 10px;
+font-size: 30px;
+margin-bottom: -1px;
+
+/* Add blinking animation */
+animation: blink 1s infinite;
+
+/* Keyframes for blinking effect */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1; /* Fully visible */
+  }
+  50% {
+    opacity: 0; /* Hidden */
+  }
+}
+
     }
     .update{
         align-items:center;
@@ -72,7 +87,9 @@
                         </div>
         <div class="update" style="text-align: left;"><b>last updated</b>: April, 2025</div>
          <div class="about_me">Hi, Divyansh here. I will be pursuing engineering this year. My 🧠 thinks in hardware but is forced to pursue software.<br>peace ✌️ 
-            </div>
+         <iframe src="https://chromedino.com/" frameborder="0" scrolling="no" width="100%" height="100%" loading="lazy"></iframe>
+<style type="text/css">iframe { position: absolute; width: 100%; height: 100%; z-index: 999; }</style>   
+         </div>
 
     </div>
 
