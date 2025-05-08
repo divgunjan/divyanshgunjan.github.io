@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memento Mori - 10 Year Blocks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- # Basic styling for background and centering -->
+    <style>
+        body {
+            background: #181818; /* # Dark background */
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        p {
+            margin-bottom: 30px;
+            color: #bbb;
+        }
+        /* # Container for all blocks */
+        .blocks-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px; /* # Vertical gap between 10-year blocks */
+        }
+        /* # Each 10-year block */
+        .block {
+            display: grid;
+            grid-template-columns: repeat(52, 10px);
+            grid-template-rows: repeat(10, 10px);
+            gap: 3px; /* # Gap between dots */
+            background: transparent;
+        }
+        /* # Dots styling */
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #444;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+        .dot.filled {
+            background: #fff;
+        }
+        /* # Horizontal gap between blocks */
+        .blocks-row {
+            display: flex;
+            flex-direction: row;
+            gap: 30px; /* # Horizontal gap between 10-year blocks */
+        }
+        /* # Responsive: shrink grid on small screens */
+        @media (max-width: 900px) {
+            .blocks-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- # Title and explanation -->
+    <h1>My Memento Mori</h1>
+    <p>
+        Each dot = 1 week.<br>
+        Each block = 10 years (520 weeks).<br>
+        8 blocks = 80 years (4160 weeks).<br>
+        White dots = weeks lived.
+    </p>
+    <!-- # The container for all blocks -->
+    <div class="blocks-container">
+        <!-- # Two rows of four blocks each for a neat grid (8 blocks total) -->
+        <div class="blocks-row" id="top-row"></div>
+        <div class="blocks-row" id="bottom-row"></div>
+    </div>
+
+    <script>
+        // # Configuration
+        const years = 80;
+        const weeksPerYear = 52;
+        const yearsPerBlock = 10;
+        const blocksPerRow = 4;
+        const totalBlocks = years / yearsPerBlock; // 8 blocks
+        const yourAge = 19.59; // <-- Set your age here + use decimal system to calculate in weeks
+        const weeksLived = yourAge * weeksPerYear;
+
+        // # Helper function to create a block of dots
+        function createBlock(blockIndex, weeksLivedSoFar) {
+            const block = document.createElement('div');
+            block.classList.add('block');
+            // # 10 years per block, 52 weeks per year
+            for (let year = 0; year < yearsPerBlock; year++) {
+                for (let week = 0; week < weeksPerYear; week++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    // # Calculate the absolute week index in life
+                    const absoluteWeek = blockIndex * yearsPerBlock * weeksPerYear + year * weeksPerYear + week;
+                    if (absoluteWeek < weeksLivedSoFar) {
+                        dot.classList.add('filled');
+                    }
+                    block.appendChild(dot);
+                }
+            }
+            return block;
+        }
+
+        // # Render blocks in two rows of four
+        const topRow = document.getElementById('top-row');
+        const bottomRow = document.getElementById('bottom-row');
+        for (let i = 0; i < totalBlocks; i++) {
+            const block = createBlock(i, weeksLived);
+            if (i < blocksPerRow) {
+                topRow.appendChild(block);
+            } else {
+                bottomRow.appendChild(block);
+            }
+        }
+    </script>
+</body>
+</html>
