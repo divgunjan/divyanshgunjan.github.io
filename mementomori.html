@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Memento Mori - 10 Year Blocks</title>
+    <title>Memento Mori - Divyansh Gunjan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- # Basic styling for background and centering -->
     <style>
@@ -53,6 +53,8 @@
         }
         /* # Horizontal gap between blocks */
         .blocks-row {
+            align-items: center;
+            vertical-align: middle; 
             display: flex;
             flex-direction: row;
             gap: 30px; /* # Horizontal gap between 10-year blocks */
@@ -60,6 +62,7 @@
         /* # Responsive: shrink grid on small screens */
         @media (max-width: 900px) {
             .blocks-row {
+                align-items: center;
                 flex-direction: column;
                 gap: 10px;
             }
