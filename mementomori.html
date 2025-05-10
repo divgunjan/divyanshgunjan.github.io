@@ -25,11 +25,12 @@
             margin-bottom: 30px;
             color: #bbb;
         }
-        /* # Container for all blocks */
+        /* # Container for all blocks (now vertical) */
         .blocks-container {
             display: flex;
             flex-direction: column;
-            gap: 5px; /* # Vertical gap between 10-year blocks */
+            gap: 30px; /* # Vertical gap between 10-year blocks */
+            align-items: center;
         }
         /* # Each 10-year block */
         .block {
@@ -51,20 +52,11 @@
         .dot.filled {
             background: #fff;
         }
-        /* # Horizontal gap between blocks */
-        .blocks-row {
-            align-items: center;
-            vertical-align: middle; 
-            display: flex;
-            flex-direction: row;
-            gap: 30px; /* # Horizontal gap between 10-year blocks */
-        }
         /* # Responsive: shrink grid on small screens */
-        @media (max-width: 900px) {
-            .blocks-row {
-                align-items: center;
-                flex-direction: column;
-                gap: 10px;
+        @media (max-width: 600px) {
+            .block {
+                grid-template-columns: repeat(26, 10px);
+                grid-template-rows: repeat(20, 10px);
             }
         }
     </style>
@@ -78,21 +70,16 @@
         8 blocks = 80 years (4160 weeks).<br>
         White dots = weeks lived.
     </p>
-    <!-- # The container for all blocks -->
-    <div class="blocks-container">
-        <!-- # Two rows of four blocks each for a neat grid (8 blocks total) -->
-        <div class="blocks-row" id="top-row"></div>
-        <div class="blocks-row" id="bottom-row"></div>
-    </div>
+    <!-- # The container for all blocks (now vertical) -->
+    <div class="blocks-container" id="blocks-container"></div>
 
     <script>
         // # Configuration
         const years = 80;
         const weeksPerYear = 52;
         const yearsPerBlock = 10;
-        const blocksPerRow = 4;
         const totalBlocks = years / yearsPerBlock; // 8 blocks
-        const yourAge = 19.59; // <-- Set your age here + use decimal system to calculate in weeks
+        const yourAge = 19.59; // <-- Set your age here (decimal for weeks)
         const weeksLived = yourAge * weeksPerYear;
 
         // # Helper function to create a block of dots
@@ -115,16 +102,11 @@
             return block;
         }
 
-        // # Render blocks in two rows of four
-        const topRow = document.getElementById('top-row');
-        const bottomRow = document.getElementById('bottom-row');
+        // # Render all blocks vertically
+        const blocksContainer = document.getElementById('blocks-container');
         for (let i = 0; i < totalBlocks; i++) {
             const block = createBlock(i, weeksLived);
-            if (i < blocksPerRow) {
-                topRow.appendChild(block);
-            } else {
-                bottomRow.appendChild(block);
-            }
+            blocksContainer.appendChild(block);
         }
     </script>
 </body>
